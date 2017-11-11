@@ -12,7 +12,6 @@ spec :: Spec
 spec = 
     describe "assembly line example" $ do
         it "works" $ do
-            let w = "some wood" 
-                wr = assemblyLine w 
-            putStrLn (show wr)
-            pending
+            let t = assemblyLine "wood"
+                Contains w = t
+            w `shouldBe` Wrapped "wood, roughly chopped, polished, wrapped"

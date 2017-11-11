@@ -4,7 +4,7 @@ module MechanizedAssemblyLine where
 type Wood = String
 type Chopsticks = String
 data Wrapped x = Wrapped x
-    deriving Show
+    deriving (Eq, Show)
 
 
 data Tray a = Empty | Contains a
@@ -16,9 +16,10 @@ instance Functor Tray where
 instance Applicative Tray where
     pure = Contains
     Contains f <*> Contains x = Contains (f x)
+    _ <*> _ = Empty
 
 instance Monad Tray where
-    Empty >>= _ = Empty
+    Empty        >>= _      = Empty
     (Contains x) >>= worker = worker x
     return = Contains
     fail _ = Empty

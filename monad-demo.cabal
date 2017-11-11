@@ -40,4 +40,4 @@ test-suite monad-demo-test
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/monad-demo
+  location: https://github.com/MarekDudek/monad-demo
