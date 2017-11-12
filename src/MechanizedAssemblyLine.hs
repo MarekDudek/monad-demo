@@ -1,5 +1,7 @@
 module MechanizedAssemblyLine where
 
+import Debug.Trace
+
 
 type Wood = String
 type Chopsticks = String
@@ -22,11 +24,14 @@ instance Monad Tray where
     Empty        >>= _      = Empty
     (Contains x) >>= worker = worker x
     return = Contains
-    fail _ = Empty
+    fail _ = trace "! failed !" Empty
 
 
 makeChopsticks :: Wood -> Tray Chopsticks
-makeChopsticks w = Contains $ w ++ ", roughly chopped"
+makeChopsticks w = 
+    if null w 
+        then trace "! got empty string !" Empty
+        else Contains $ w ++ ", roughly chopped"
 
 polishChopsticks :: Chopsticks -> Tray Chopsticks
 polishChopsticks c = Contains $ c ++ ", polished"
