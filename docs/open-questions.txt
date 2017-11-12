@@ -1,0 +1,2 @@
+
+* when does 'fail' method work? how to manually call it? 'guard' function in do notation?
