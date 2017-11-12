@@ -1,2 +1,3 @@
 
 * when does 'fail' method work? how to manually call it? 'guard' function in do notation?
+* how to make 'fail' work properly for Either? there should be a way using 'transformers' and/or 'mtl'

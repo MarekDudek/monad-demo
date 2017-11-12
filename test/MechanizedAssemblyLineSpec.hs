@@ -61,4 +61,5 @@ spec =
         it "3, failure in 'make'   function" $ do
             assemblyLine3 "" `shouldBe` Empty 
             assemblyLine3 "" `shouldBe` Failed2 "wood was empty"
-            assemblyLine3 "" `shouldBe` Just    "wood was empty"
+            assemblyLine3 "" `shouldBe` Nothing
+            -- assemblyLine3 "" `shouldBe` (Left "wood was empty" :: Either String (Wrapped Chopsticks))
