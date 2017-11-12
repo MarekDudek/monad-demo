@@ -82,11 +82,14 @@ makeChopsticks2 w =
 polishChopsticks2 :: Chopsticks -> Tray2 Chopsticks
 polishChopsticks2 c = 
     if length c `mod` 3 /= 0
-        then Contains2 $ c ++ (trace (show $ length c) ", polished")
+        then Contains2 $ c ++ ", polished" -- adds 10 characters
         else Failed2 "number of chopstics was divisible by three"
 
 wrapChopsticks2 :: Chopsticks -> Tray2 (Wrapped Chopsticks)
-wrapChopsticks2 c = Contains2 (Wrapped (c ++ ", wrapped"))
+wrapChopsticks2 c = 
+    if length c `mod` 4 /= 0
+        then Contains2 (Wrapped (c ++ ", wrapped"))
+        else Failed2 "number of chopstics was divisible by four"
 
 
 assemblyLine2 :: Wood -> Tray2 (Wrapped Chopsticks)
