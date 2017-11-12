@@ -99,7 +99,7 @@ assemblyLine2 w =
         c <- makeChopsticks2   w
         p <- polishChopsticks2 c
         w <- wrapChopsticks2   p
-        return w
+        Contains2 w
 
 assemblyLine2' :: Wood -> Tray2 (Wrapped Chopsticks)
 assemblyLine2' w = (return w) >>= makeChopsticks2 >>= polishChopsticks2 >>= wrapChopsticks2
@@ -107,7 +107,10 @@ assemblyLine2' w = (return w) >>= makeChopsticks2 >>= polishChopsticks2 >>= wrap
 -- independent from concrete monad
 
 makeChopsticks3 :: (Monad m) => Wood -> m Chopsticks
-makeChopsticks3 w = return $ w ++ ", roughly chopped"
+makeChopsticks3 w = 
+    if null w 
+        then fail "wood was empty"
+        else return $ w ++ ", roughly chopped"
 
 polishChopsticks3 :: (Monad m) => Chopsticks -> m Chopsticks
 polishChopsticks3 c = return $ c ++ ", polished"

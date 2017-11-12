@@ -58,3 +58,6 @@ spec =
             assemblyLine3 "wood" `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
             assemblyLine3 "wood" `shouldBe` Just      (Wrapped "wood, roughly chopped, polished, wrapped")
             assemblyLine3 "wood" `shouldBe` (Right    (Wrapped "wood, roughly chopped, polished, wrapped") :: Either String (Wrapped Chopsticks))
+        it "3, failure in 'make'   function" $ do
+            assemblyLine3 "" `shouldBe` Empty 
+            assemblyLine3 "" `shouldBe` Failed2 "wood was empty"
