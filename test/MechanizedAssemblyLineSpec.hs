@@ -23,3 +23,15 @@ spec =
         it "works in failure case, bind version" $ do
             let t = assemblyLine' ""
             t `shouldBe` Empty
+        it "with do notation, 2" $ do
+            let t = assemblyLine2  "wood"
+            t `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
+        it "with bind, 2" $ do
+            let t = assemblyLine2' "wood"
+            t `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
+        it "works in failure case, do version, 2" $ do
+            let t = assemblyLine2  ""
+            t `shouldBe` Failed2 "wood was empty"
+        it "works in failure case, bind version" $ do
+            let t = assemblyLine2' ""
+            t `shouldBe` Failed2 "wood was empty"
