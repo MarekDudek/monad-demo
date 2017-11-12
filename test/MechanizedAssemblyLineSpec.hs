@@ -34,7 +34,22 @@ spec =
             t `shouldBe` Failed2 "wood was empty"
         it "2, failure in 'polish' function" $ do
             let t = assemblyLine2' "1"
-            t `shouldBe` Failed2 "number of chopstics was divisible by three" 
+            t `shouldBe` Failed2 "number of chopsticks was divisible by three" 
         it "2, failure in 'wrap'   function" $ do
             let t = assemblyLine2' "12345"
-            t `shouldBe` Failed2 "number of chopstics was divisible by four"
+            t `shouldBe` Failed2 "number of chopsticks was divisible by four"
+        it "3, 'make' function" $ do
+            makeChopsticks3 "wood" `shouldBe` Contains  "wood, roughly chopped"
+            makeChopsticks3 "wood" `shouldBe` Contains2 "wood, roughly chopped"
+            makeChopsticks3 "wood" `shouldBe` Just      "wood, roughly chopped"
+            makeChopsticks3 "wood" `shouldBe` (Right    "wood, roughly chopped" :: Either String Chopsticks)
+        it "3, 'polish' function" $ do
+            polishChopsticks3 "wood, roughly chopped" `shouldBe` Contains  "wood, roughly chopped, polished"
+            polishChopsticks3 "wood, roughly chopped" `shouldBe` Contains2 "wood, roughly chopped, polished"
+            polishChopsticks3 "wood, roughly chopped" `shouldBe` Just      "wood, roughly chopped, polished"
+            polishChopsticks3 "wood, roughly chopped" `shouldBe` (Right    "wood, roughly chopped, polished" :: Either String Chopsticks)
+        it "3, 'wrap' function" $ do
+            wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Contains  (Wrapped "wood, roughly chopped, polished, wrapped")
+            wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
+            wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Just      (Wrapped "wood, roughly chopped, polished, wrapped")
+            wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` (Right    (Wrapped "wood, roughly chopped, polished, wrapped") :: Either String (Wrapped Chopsticks))

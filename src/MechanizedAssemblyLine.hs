@@ -3,8 +3,9 @@ module MechanizedAssemblyLine where
 import Debug.Trace
 
 
-type Wood = String
+type Wood       = String
 type Chopsticks = String
+
 data Wrapped x = Wrapped x
     deriving (Eq, Show)
 
@@ -14,7 +15,7 @@ data Tray a = Contains a | Empty
     deriving (Eq, Show)
 
 instance Functor Tray where
-    fmap f (Contains x) = Contains (f x)
+    f `fmap `(Contains x) = Contains (f x)
 
 instance Applicative Tray where
     pure = Contains
@@ -58,7 +59,7 @@ data Tray2 x = Contains2 x | Failed2 String
     deriving (Eq, Show)
 
 instance Functor Tray2 where
-    fmap f (Contains2 x) = Contains2 (f x)
+    f `fmap` (Contains2 x) = Contains2 (f x)
 
 instance Applicative Tray2 where
     pure = Contains2
@@ -83,13 +84,13 @@ polishChopsticks2 :: Chopsticks -> Tray2 Chopsticks
 polishChopsticks2 c = 
     if length c `mod` 3 /= 0
         then Contains2 $ c ++ ", polished" -- adds 10 characters
-        else Failed2 "number of chopstics was divisible by three"
+        else Failed2 "number of chopsticks was divisible by three"
 
 wrapChopsticks2 :: Chopsticks -> Tray2 (Wrapped Chopsticks)
 wrapChopsticks2 c = 
     if length c `mod` 4 /= 0
         then Contains2 (Wrapped (c ++ ", wrapped"))
-        else Failed2 "number of chopstics was divisible by four"
+        else Failed2 "number of chopsticks was divisible by four"
 
 
 assemblyLine2 :: Wood -> Tray2 (Wrapped Chopsticks)
@@ -102,3 +103,22 @@ assemblyLine2 w =
 
 assemblyLine2' :: Wood -> Tray2 (Wrapped Chopsticks)
 assemblyLine2' w = (return w) >>= makeChopsticks2 >>= polishChopsticks2 >>= wrapChopsticks2
+
+-- independent from concrete monad
+
+makeChopsticks3 :: (Monad m) => Wood -> m Chopsticks
+makeChopsticks3 w = return $ w ++ ", roughly chopped"
+
+polishChopsticks3 :: (Monad m) => Chopsticks -> m Chopsticks
+polishChopsticks3 c = return $ c ++ ", polished"
+
+wrapChopsticks3 :: (Monad m) => Chopsticks -> m (Wrapped Chopsticks)
+wrapChopsticks3 c = return (Wrapped (c ++ ", wrapped"))
+
+assemblyLine3 :: (Monad m) => Wood -> m (Wrapped Chopsticks)
+assemblyLine3 w = 
+    do 
+        c <- makeChopsticks3   w
+        p <- polishChopsticks3 c
+        w <- wrapChopsticks3   p
+        return w
