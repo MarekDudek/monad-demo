@@ -44,9 +44,9 @@ wrapChopsticks c = Contains (Wrapped (c ++ ", wrapped"))
 assemblyLine :: Wood -> Tray (Wrapped Chopsticks)
 assemblyLine w = 
     do 
-        c <- makeChopsticks w
+        c <- makeChopsticks   w
         p <- polishChopsticks c
-        w <- wrapChopsticks p
+        w <- wrapChopsticks   p
         return w
 
 assemblyLine' :: Wood -> Tray (Wrapped Chopsticks)
@@ -76,11 +76,14 @@ instance Monad Tray2 where
 makeChopsticks2 :: Wood -> Tray2 Chopsticks
 makeChopsticks2 w = 
     if null w 
-        then trace "! got empty string !" Failed2 "wood was empty"
+        then Failed2 "wood was empty"
         else Contains2 $ w ++ ", roughly chopped"
 
 polishChopsticks2 :: Chopsticks -> Tray2 Chopsticks
-polishChopsticks2 c = Contains2 $ c ++ ", polished"
+polishChopsticks2 c = 
+    if length c `div` 3 /= 0
+        then Contains2 $ c ++ ", polished"
+        else Failed2 "number of chopstics was divisible by three"
 
 wrapChopsticks2 :: Chopsticks -> Tray2 (Wrapped Chopsticks)
 wrapChopsticks2 c = Contains2 (Wrapped (c ++ ", wrapped"))
@@ -89,9 +92,9 @@ wrapChopsticks2 c = Contains2 (Wrapped (c ++ ", wrapped"))
 assemblyLine2 :: Wood -> Tray2 (Wrapped Chopsticks)
 assemblyLine2 w = 
     do 
-        c <- makeChopsticks2 w
+        c <- makeChopsticks2   w
         p <- polishChopsticks2 c
-        w <- wrapChopsticks2 p
+        w <- wrapChopsticks2   p
         return w
 
 assemblyLine2' :: Wood -> Tray2 (Wrapped Chopsticks)
