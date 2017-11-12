@@ -43,3 +43,5 @@ assemblyLine w =
         w <- wrapChopsticks p
         return w
 
+assemblyLine' :: Wood -> Tray (Wrapped Chopsticks)
+assemblyLine' w = (return w) >>= makeChopsticks >>= polishChopsticks >>= wrapChopsticks

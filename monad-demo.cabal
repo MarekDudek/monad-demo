@@ -32,7 +32,7 @@ test-suite monad-demo-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
-  other-modules:       SomeSpec
+  other-modules:       MechanizedAssemblyLineSpec
   build-depends:       base, hspec
                      , monad-demo
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
