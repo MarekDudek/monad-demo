@@ -53,3 +53,8 @@ spec =
             wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
             wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Just      (Wrapped "wood, roughly chopped, polished, wrapped")
             wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` (Right    (Wrapped "wood, roughly chopped, polished, wrapped") :: Either String (Wrapped Chopsticks))
+        it "3, assembly line" $ do
+            assemblyLine3 "wood" `shouldBe` Contains  (Wrapped "wood, roughly chopped, polished, wrapped")
+            assemblyLine3 "wood" `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
+            assemblyLine3 "wood" `shouldBe` Just      (Wrapped "wood, roughly chopped, polished, wrapped")
+            assemblyLine3 "wood" `shouldBe` (Right    (Wrapped "wood, roughly chopped, polished, wrapped") :: Either String (Wrapped Chopsticks))
