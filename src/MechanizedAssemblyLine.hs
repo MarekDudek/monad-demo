@@ -8,7 +8,7 @@ data Wrapped x = Wrapped x
 
 
 data Tray a = Empty | Contains a
-    deriving Show
+    deriving (Eq, Show)
 
 instance Functor Tray where
     fmap f (Contains x) = Contains (f x)
