@@ -77,12 +77,12 @@ makeChopsticks2 :: Wood -> Tray2 Chopsticks
 makeChopsticks2 w = 
     if null w 
         then Failed2 "wood was empty"
-        else Contains2 $ w ++ ", roughly chopped"
+        else Contains2 $ w ++ ", roughly chopped" -- adds 17 characters
 
 polishChopsticks2 :: Chopsticks -> Tray2 Chopsticks
 polishChopsticks2 c = 
-    if length c `div` 3 /= 0
-        then Contains2 $ c ++ ", polished"
+    if length c `mod` 3 /= 0
+        then Contains2 $ c ++ (trace (show $ length c) ", polished")
         else Failed2 "number of chopstics was divisible by three"
 
 wrapChopsticks2 :: Chopsticks -> Tray2 (Wrapped Chopsticks)

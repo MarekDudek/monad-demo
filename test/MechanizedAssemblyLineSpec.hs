@@ -24,14 +24,20 @@ spec =
             let t = assemblyLine' ""
             t `shouldBe` Empty
         it "with do notation, 2" $ do
-            let t = assemblyLine2  "wood"
-            t `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
+            let t = assemblyLine2  "wo"
+            t `shouldBe` Contains2 (Wrapped "wo, roughly chopped, polished, wrapped")
         it "with bind, 2" $ do
-            let t = assemblyLine2' "wood"
-            t `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
+            let t = assemblyLine2' "wo"
+            t `shouldBe` Contains2 (Wrapped "wo, roughly chopped, polished, wrapped")
         it "works in failure case, do version, 2" $ do
             let t = assemblyLine2  ""
             t `shouldBe` Failed2 "wood was empty"
         it "works in failure case, bind version" $ do
             let t = assemblyLine2' ""
             t `shouldBe` Failed2 "wood was empty"
+        it "2, failure in polish function" $ do
+            let t = assemblyLine2' "1"
+            t `shouldBe` Failed2 "number of chopstics was divisible by three" 
+        it "2, polish function fails when ordered" $ do
+            let p = polishChopsticks2 "123"
+            p `shouldBe` Failed2 "number of chopstics was divisible by three" 
