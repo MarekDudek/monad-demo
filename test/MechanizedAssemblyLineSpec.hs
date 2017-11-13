@@ -65,3 +65,5 @@ spec =
             -- assemblyLine3 "" `shouldBe` (Left "wood was empty" :: Either String (Wrapped Chopsticks))
         it "3, failure in 'polish' function" $ do
             assemblyLine3 "1" `shouldBe` Failed2 "number of chopsticks was divisible by three" 
+        it "3, failure in 'wrap' function" $ do
+            assemblyLine3 "12345" `shouldBe` Failed2 "number of chopsticks was divisible by four" 

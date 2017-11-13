@@ -119,7 +119,10 @@ polishChopsticks3 c =
         else return $ c ++ ", polished"
 
 wrapChopsticks3 :: (Monad m) => Chopsticks -> m (Wrapped Chopsticks)
-wrapChopsticks3 c = return (Wrapped (c ++ ", wrapped"))
+wrapChopsticks3 c = 
+    if length c `mod` 4 == 0
+        then fail "number of chopsticks was divisible by four"
+        else return (Wrapped (c ++ ", wrapped"))
 
 assemblyLine3 :: (Monad m) => Wood -> m (Wrapped Chopsticks)
 assemblyLine3 w = 
