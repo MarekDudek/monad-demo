@@ -44,22 +44,24 @@ spec =
             makeChopsticks3 "wood" `shouldBe` Just      "wood, roughly chopped"
             makeChopsticks3 "wood" `shouldBe` (Right    "wood, roughly chopped" :: Either String Chopsticks)
         it "3, 'polish' function" $ do
-            polishChopsticks3 "wood, roughly chopped" `shouldBe` Contains  "wood, roughly chopped, polished"
-            polishChopsticks3 "wood, roughly chopped" `shouldBe` Contains2 "wood, roughly chopped, polished"
-            polishChopsticks3 "wood, roughly chopped" `shouldBe` Just      "wood, roughly chopped, polished"
-            polishChopsticks3 "wood, roughly chopped" `shouldBe` (Right    "wood, roughly chopped, polished" :: Either String Chopsticks)
+            polishChopsticks3 "wo, roughly chopped" `shouldBe` Contains  "wo, roughly chopped, polished"
+            polishChopsticks3 "wo, roughly chopped" `shouldBe` Contains2 "wo, roughly chopped, polished"
+            polishChopsticks3 "wo, roughly chopped" `shouldBe` Just      "wo, roughly chopped, polished"
+            polishChopsticks3 "wo, roughly chopped" `shouldBe` (Right    "wo, roughly chopped, polished" :: Either String Chopsticks)
         it "3, 'wrap' function" $ do
             wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Contains  (Wrapped "wood, roughly chopped, polished, wrapped")
             wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
             wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` Just      (Wrapped "wood, roughly chopped, polished, wrapped")
             wrapChopsticks3 "wood, roughly chopped, polished" `shouldBe` (Right    (Wrapped "wood, roughly chopped, polished, wrapped") :: Either String (Wrapped Chopsticks))
-        it "3, assembly line" $ do
-            assemblyLine3 "wood" `shouldBe` Contains  (Wrapped "wood, roughly chopped, polished, wrapped")
-            assemblyLine3 "wood" `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
-            assemblyLine3 "wood" `shouldBe` Just      (Wrapped "wood, roughly chopped, polished, wrapped")
-            assemblyLine3 "wood" `shouldBe` (Right    (Wrapped "wood, roughly chopped, polished, wrapped") :: Either String (Wrapped Chopsticks))
-        it "3, failure in 'make'   function" $ do
+        --it "3, assembly line" $ do
+        --    assemblyLine3 "wood" `shouldBe` Contains  (Wrapped "wood, roughly chopped, polished, wrapped")
+        --    assemblyLine3 "wood" `shouldBe` Contains2 (Wrapped "wood, roughly chopped, polished, wrapped")
+        --    assemblyLine3 "wood" `shouldBe` Just      (Wrapped "wood, roughly chopped, polished, wrapped")
+        --    assemblyLine3 "wood" `shouldBe` (Right    (Wrapped "wood, roughly chopped, polished, wrapped") :: Either String (Wrapped Chopsticks))
+        it "3, failure in 'make' function" $ do
             assemblyLine3 "" `shouldBe` Empty 
             assemblyLine3 "" `shouldBe` Failed2 "wood was empty"
             assemblyLine3 "" `shouldBe` Nothing
             -- assemblyLine3 "" `shouldBe` (Left "wood was empty" :: Either String (Wrapped Chopsticks))
+        it "3, failure in 'polish' function" $ do
+            assemblyLine3 "1" `shouldBe` Failed2 "number of chopsticks was divisible by three" 

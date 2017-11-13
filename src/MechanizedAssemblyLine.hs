@@ -113,7 +113,10 @@ makeChopsticks3 w =
         else return $ w ++ ", roughly chopped"
 
 polishChopsticks3 :: (Monad m) => Chopsticks -> m Chopsticks
-polishChopsticks3 c = return $ c ++ ", polished"
+polishChopsticks3 c = 
+    if length c `mod` 3 == 0
+        then fail "number of chopsticks was divisible by three"
+        else return $ c ++ ", polished"
 
 wrapChopsticks3 :: (Monad m) => Chopsticks -> m (Wrapped Chopsticks)
 wrapChopsticks3 c = return (Wrapped (c ++ ", wrapped"))
